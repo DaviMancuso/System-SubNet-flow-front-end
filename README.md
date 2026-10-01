@@ -1,148 +1,124 @@
 # SubNetFlow
 
-Protótipo de planejamento de sub-redes IPv4 com VLSM, feito em **HTML, CSS e JavaScript puro**. A identidade visual do projeto original foi mantida, com ajustes na prévia, navegação e mensagens.
+Protótipo web para calcular e organizar sub-redes IPv4 usando VLSM, desenvolvido em **HTML, CSS e JavaScript puro**.
 
-## Executar
+O projeto é executado localmente no navegador e permite informar uma rede principal, definir a quantidade de hosts de cada setor e visualizar a distribuição das sub-redes.
 
-1. Extraia o ZIP completo.
-2. Abra a pasta `subnetflow` no VS Code.
-3. Com a extensão **Live Server**, abra o `index.html` da raiz usando **Open with Live Server**.
-4. Clique em **Experimentar demonstração** ou preencha os formulários com dados fictícios.
+## Funcionalidades
 
-Outra opção, se Python estiver instalado, é executar na pasta `subnetflow`:
+- Planejamento de sub-redes com VLSM.
+- Prévia da capacidade da rede e dos endereços reservados.
+- Exibição de rede, prefixo, máscara, faixa de hosts e broadcast.
+- Salvamento, consulta, reabertura e exclusão de planejamentos.
+- Busca no histórico e exportação dos resultados em CSV.
+- Tema claro, escuro ou definido pelo sistema.
+- Formulários de login e cadastro de demonstração.
+
+## Tecnologias
+
+- **HTML:** estrutura das páginas e formulários.
+- **CSS:** aparência, responsividade e estados visuais.
+- **JavaScript:** cálculos, validações, eventos e armazenamento local.
+
+Não é necessário instalar dependências ou executar uma etapa de build para utilizar o sistema.
+
+## Organização
+
+Os caminhos abaixo são relativos à pasta `subnetflow`:
+
+| Pasta ou arquivo | Responsabilidade |
+| --- | --- |
+| `assets/` | Recursos visuais do projeto. |
+| `css/` | Estilos compartilhados e específicos de cada página. |
+| `html/` | Telas de acesso, cálculo e histórico. |
+| `js/` | Controladores das páginas, cálculos e serviços compartilhados. |
+| `tests/` | Testes automatizados dos cálculos e serviços. |
+
+| Página | Arquivo |
+| --- | --- |
+| Acesso | `html/inicio/index.html` |
+| Calculadora | `html/calcular/calcular.html` |
+| Histórico | `html/historico/historico.html` |
+
+HTML, CSS e JavaScript ficam separados. O código utiliza indentação de quatro espaços e comentários curtos para explicar a responsabilidade dos blocos.
+
+## Executar localmente
+
+### Com Live Server
+
+1. Abra a pasta `subnetflow` no VS Code.
+2. Instale a extensão **Live Server**, caso ainda não tenha.
+3. Localize `html/inicio/index.html`.
+4. Clique com o botão direito nesse arquivo e selecione **Open with Live Server**.
+5. Na tela de acesso, clique em **Experimentar demonstração** ou preencha os formulários com dados fictícios.
+
+### Com Python
+
+Se tiver Python instalado, abra um terminal dentro da pasta `subnetflow` e execute:
 
 ```bash
-python -m http.server 5500
+python -m http.server 5500 --bind 127.0.0.1
 ```
 
-Acesse `http://localhost:5500`.
+Depois, acesse:
 
-O projeto utiliza módulos nativos de JavaScript (`import` e `export`). Por isso, precisa ser servido por HTTP; abrir os arquivos internos diretamente com `file://` bloqueia o carregamento dos módulos em navegadores comuns. O `index.html` da raiz mostra essa orientação quando aberto com duplo clique.
+[http://localhost:5500/html/inicio/index.html](http://localhost:5500/html/inicio/index.html)
 
-**Não há build, framework ou instalação de pacotes para usar o sistema.** Node.js é necessário apenas se você quiser executar os testes. As fontes do Google são opcionais: quando indisponíveis, o navegador usa fontes locais.
+**A tela inicial está dentro de `html/inicio/`; não há um `index.html` na raiz nesta estrutura.**
 
-## Organização das pastas
+O projeto utiliza módulos JavaScript com `import` e `export`. Por isso, execute por um servidor local: abrir o HTML diretamente com duplo clique pode bloquear o carregamento dos scripts.
 
-A organização é horizontal por tecnologia, com páginas separadas dentro de cada camada. Os nomes de pastas usam letras minúsculas, sem espaços ou acentos.
+Node.js não é necessário para utilizar as telas. As fontes externas têm alternativas locais caso não possam ser carregadas.
 
-| Caminho | Responsabilidade |
-| --- | --- |
-| `index.html` | Ponto de entrada; encaminha para a tela inicial. |
-| `html/inicio/index.html` | Acesso e cadastro de demonstração. |
-| `html/calcular/calcular.html` | Formulário, prévia, resultados e explicação do cálculo. |
-| `html/historico/historico.html` | Busca, abertura e exclusão de planos salvos. |
-| `css/base.css` | Cores, tipografia, acessibilidade e regras básicas. |
-| `css/componentes.css` | Cabeçalho, conta, botões, mensagens e diálogos compartilhados. |
-| `css/inicio/style.css` | Estilos exclusivos da tela inicial. |
-| `css/calcular/calcular.css` | Estilos exclusivos da calculadora. |
-| `css/historico/historico.css` | Estilos exclusivos do histórico. |
-| `js/entrada.js` | Encaminhamento da página raiz. |
-| `js/inicio/inicio.js` | Eventos e validações dos formulários de acesso. |
-| `js/calcular/calcular.js` | Eventos da calculadora e preenchimento dos resultados. |
-| `js/historico/historico.js` | Eventos, filtros e confirmações do histórico. |
-| `js/core/ipv4.js` | Conversão de endereços, máscaras e validação da rede. |
-| `js/core/vlsm.js` | Dimensionamento, alocação e resumo das sub-redes. |
-| `js/servicos/armazenamento.js` | Leitura e escrita dos dados locais, com tratamento de falhas. |
-| `js/servicos/sessao.js` | Sessão de demonstração. |
-| `js/servicos/historico.js` | Persistência de planejamentos por e-mail. |
-| `js/servicos/exportacao.js` | Geração e download de CSV. |
-| `js/compartilhado/tema.js` | Preferência de tema claro, escuro ou do sistema. |
-| `js/compartilhado/interface.js` | Menu da conta, perfil, configurações e mensagens. |
-| `assets/` | Favicon e fluxograma original, preservado. |
-| `tests/` | Testes automatizados de cálculo e serviços. |
+## Como utilizar
 
-## Padrão de código
+1. Acesse a demonstração.
+2. Informe a rede no formato IPv4/CIDR, como `192.168.10.0/24`.
+3. Adicione os setores e suas quantidades de hosts.
+4. Clique em **Calcular planejamento**.
+5. Consulte os resultados e, se desejar, salve o plano ou exporte o CSV.
+6. Acesse **Histórico** para buscar e reabrir os planejamentos salvos.
 
-- Recuo de quatro espaços, blocos abertos em linhas legíveis e comentários curtos por responsabilidade.
-- **HTML:** estrutura, textos fixos, formulários e elementos `<template>` reutilizados pela interface.
-- **CSS:** cores, espaçamentos, estados visuais, responsividade e animações.
-- **JavaScript:** cálculos, eventos, validações, preenchimento de dados e armazenamento.
-- Sem atributos `style`, blocos `<style>`, eventos `onclick` ou scripts embutidos no HTML.
-- Sem montagem de telas por `innerHTML` nem atribuições de aparência por `.style` no JavaScript.
-- Conteúdo dinâmico é inserido por `textContent`; classes, `hidden`, `data-*` e atributos ARIA representam estados.
-- O mapa usa SVG: o JavaScript fornece posições e larguras proporcionais aos dados, enquanto o CSS define as cores e a aparência.
+Alterar a rede ou os setores invalida o resultado anterior. Faça um novo cálculo antes de salvar ou exportar.
 
-O arquivo `.editorconfig` mantém o mesmo padrão de recuo e codificação nos editores que o reconhecem.
+## Regras do planejamento
 
-## Correções e melhorias
+O cálculo utiliza redes LAN convencionais, reservando um endereço de rede e um de broadcast em cada sub-rede.
 
-| Problema no original | Comportamento atual |
-| --- | --- |
-| “Salvar rede” chamava `longToIp`, que não existia, e lia campos incorretos. | Salva a rede normalizada e todos os setores necessários para reabrir o cálculo. |
-| O aproveitamento do histórico usava `result.usable`, ausente nos resultados. | Usa a capacidade utilizável real das sub-redes. |
-| A prévia subtraía apenas a quantidade de hosts. | Considera blocos completos, incluindo rede, broadcast e folga, e avisa quando não cabem. |
-| Editar campos ou carregar um exemplo deixava um resultado antigo disponível para salvar/exportar. | Qualquer edição invalida o resultado até um novo cálculo. |
-| Registros e exemplos apareciam em um histórico global. | Cada e-mail de demonstração possui seu próprio histórico local, inicialmente vazio. |
-| Não era possível reabrir um cálculo salvo. | O botão **Abrir** recupera rede, setores e resultados. |
-| O tema se perdia entre as páginas. | A preferência é persistida, com opção de acompanhar o sistema. |
-| Os links de navegação desapareciam no celular. | A navegação possui uma segunda linha em telas menores. |
-| O histórico interpretava dados salvos como HTML. | Os valores são exibidos como texto. |
-| Falhas de armazenamento não eram apresentadas ao usuário. | Erros são informados; dados corrompidos não são sobrescritos silenciosamente. |
-| Cadastro ignorava campos vazios e confirmação de senha. | Os formulários validam os campos e a confirmação. |
-| Perfil e configurações mostravam apenas alertas de implementação futura. | Diálogos exibem o perfil de demonstração e as preferências de tema. |
+- Prefixos da rede principal: `/0` a `/30`.
+- Menor sub-rede gerada: `/30`.
+- Quantidade de hosts: números inteiros positivos, sujeitos à capacidade da rede.
+- Os setores que precisam de blocos maiores são alocados primeiro.
+- Endereços de hosts são normalizados para o endereço da rede correspondente.
+- A ocupação considera todo o bloco reservado, incluindo rede, broadcast e folga.
 
-A exportação CSV preserva acentos, escapa aspas e trata nomes iniciados como fórmulas para reduzir o risco de interpretação pelo Excel. A exclusão de registros exige confirmação na interface.
+Este planejador não gera blocos `/31` ou `/32`.
 
-## Regras do cálculo
+## Armazenamento e acesso
 
-Este protótipo planeja **redes LAN IPv4 convencionais**, mantendo a regra do original: cada sub-rede reserva um endereço de rede e um de broadcast.
+Esta versão funciona como **demonstração local**, sem backend ou banco de dados externo.
 
-- Rede principal: prefixos de `/0` a `/30`.
-- Menor bloco gerado: `/30`, mesmo quando o setor solicita apenas um host.
-- Um endereço de host é normalizado para sua rede: `192.168.1.50/26` corresponde a `192.168.1.0/26`.
-- Os maiores blocos são alocados primeiro. Empates preservam a ordem de entrada.
-- Hosts: inteiros de `1` a `4.294.967.294`, sujeitos à capacidade da rede informada.
-- Limite de interface: 256 setores por planejamento.
-- `/31` e `/32` têm uma mensagem específica sobre o escopo; não são tratados como prefixos IPv4 inexistentes. O uso de `/31` em enlaces ponto a ponto é definido pela [RFC 3021](https://www.rfc-editor.org/rfc/rfc3021.html).
+- A sessão de demonstração usa `sessionStorage`.
+- O histórico e a preferência de tema usam `localStorage`.
+- Os planejamentos são organizados pelo e-mail informado na demonstração.
+- A aplicação não verifica credenciais nem armazena senhas.
 
-Exemplo inicial:
+A separação por e-mail organiza os registros; ela não representa autenticação ou proteção de acesso real.
 
-| Setor | Hosts pedidos | Sub-rede | Hosts utilizáveis |
-| --- | ---: | --- | ---: |
-| Administrativo | 50 | `192.168.10.0/26` | 62 |
-| Financeiro | 25 | `192.168.10.64/27` | 30 |
-| Tecnologia | 10 | `192.168.10.96/28` | 14 |
-| Servidores | 2 | `192.168.10.112/30` | 2 |
-
-São **87 hosts solicitados**, **116 endereços reservados**, **108 hosts utilizáveis nos blocos** e **140 endereços ainda livres**. O aproveitamento é `87 ÷ 108`, arredondado para **81%**.
-
-O cálculo representa a divisão matemática. Não verifica se uma faixa é apropriada para uso em uma rede real ou se já está ocupada por outro equipamento.
-
-## Dados e limites da demonstração
-
-**O login não é autenticação real.** Não há backend, conferência de senha, recuperação de conta ou isolamento de segurança. As senhas preenchidas não são armazenadas pela aplicação. Informar o mesmo e-mail permite acessar o mesmo histórico neste navegador.
-
-A sessão usa `sessionStorage`, e os planos usam `localStorage`, na chave `subnetflow_history_v2:<email>`. O tema utiliza `subnetflow_theme`.
-
-Os dados dependem do navegador e da origem do site. Mudar entre `localhost` e `127.0.0.1`, mudar a porta, trocar de navegador ou limpar os dados do site pode fazer o histórico parecer vazio. Isso não é sincronização com uma conta real.
-
-A chave antiga `subnetflow_demo_history` foi preservada. Seus registros não são importados automaticamente, pois o formato original não indicava a conta proprietária nem guardava os setores completos para reconstruir os cálculos.
-
-Para uma versão de produção, o backend deverá autenticar os usuários, autorizar o acesso a cada plano e validar novamente os dados. A separação em serviços permite substituir o armazenamento local por chamadas à API sem misturar isso ao algoritmo de VLSM.
+Os dados ficam no navegador utilizado. Limpar os dados do site remove os registros locais. Trocar de navegador, endereço ou porta utiliza um armazenamento diferente.
 
 ## Testes
 
-Com **Node.js 20 ou superior**, execute na raiz do projeto:
+Os testes são opcionais para quem deseja verificar os cálculos e os serviços.
+
+Com **Node.js 24 ou superior**, execute dentro da pasta `subnetflow`:
 
 ```bash
-npm test
+node --test tests/*.test.js
 ```
 
-Não é necessário executar `npm install`: os 20 testes incluídos utilizam somente módulos nativos do Node.js.
+Esse comando não depende de `package.json` ou de instalação de pacotes. O Node.js 24 reconhece a sintaxe de módulos utilizada nos arquivos JavaScript.
 
-Eles verificam endereços e máscaras, normalização, fronteiras de capacidade, `/0`, último bloco IPv4, ordenação, ausência de sobreposição, salvamento e reabertura, separação dos históricos, falhas de armazenamento, sessão e CSV.
+## Objetivo
 
-Também foram executadas, durante esta revisão, **45 verificações adicionais em DOM simulado**, cobrindo integração dos formulários, prévia, resultados, gravação, reabertura, filtros, exclusão, tema e tratamento de conteúdo como texto. Esse ensaio utilizou uma ferramenta externa de desenvolvimento e não é necessário para executar o projeto.
-
-Os caminhos locais, imports, IDs, rótulos e sintaxe JavaScript foram conferidos. A inspeção visual em um navegador real não foi concluída: o navegador de verificação bloqueou o acesso ao servidor local do ambiente. O DOM simulado não valida dimensões, cores ou posicionamento.
-
-## Adicionar uma nova tela
-
-1. Crie o HTML em `html/nome-da-tela/`.
-2. Crie o CSS específico em `css/nome-da-tela/`.
-3. Crie o controlador em `js/nome-da-tela/`.
-4. Inclua `base.css`, `componentes.css` e o CSS da tela.
-5. Carregue o controlador usando `<script type="module" src="...">`.
-6. Reutilize os serviços e as funções de `js/core` por imports.
-
-O cabeçalho e os diálogos aparecem nos dois HTML internos para manter a estrutura visual no HTML, sem gerá-la em strings JavaScript. Se o número de páginas crescer muito, um mecanismo de templates durante o build pode eliminar essa repetição.
+Servir como base de estudo e desenvolvimento de uma ferramenta visual para planejamento de sub-redes, com separação entre interface, regras de cálculo e armazenamento.
