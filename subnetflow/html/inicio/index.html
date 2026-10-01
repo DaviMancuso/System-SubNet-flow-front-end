@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Demonstração do planejador de sub-redes IPv4 SubNetFlow.">
+        <title>Acesso | SubNetFlow</title>
+        <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="../../css/base.css">
+        <link rel="stylesheet" href="../../css/componentes.css">
+        <link rel="stylesheet" href="../../css/inicio/style.css">
+        <script type="module" src="../../js/inicio/inicio.js"></script>
+    </head>
+    <body>
+        <noscript>
+            <p class="noscript-note">Ative o JavaScript para usar o SubNetFlow.</p>
+        </noscript>
+        <section class="auth-screen" id="authScreen">
+            <!-- Apresentação e acesso à demonstração. -->
+            <div class="auth-brand-panel">
+                <a class="brand auth-brand" href="index.html" aria-label="SubNetFlow">
+                    <span class="brand-mark" aria-hidden="true">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </span>
+                    <span>Subnet<span>Flow</span></span>
+                </a>
+                <div class="auth-presentation">
+                    <span class="eyebrow">PLANEJAMENTO IPV4 COM VLSM</span>
+                    <h1>Planeje sub-redes.<br>
+                        <em>Salve seu histórico.</em>
+                    </h1>
+                    <p>Experimente o planejamento de redes, consulte cálculos anteriores e organize seus resultados neste navegador.</p>
+                    <div class="auth-feature-list">
+                        <div>
+                            <span>✓</span>
+                            <p>
+                                <strong>Planejamentos organizados</strong>
+                                <small>Salve suas redes neste navegador, separadas por e-mail.</small>
+                            </p>
+                        </div>
+                        <div>
+                            <span>✓</span>
+                            <p>
+                                <strong>Acesso rápido aos resultados</strong>
+                                <small>Reabra os planos para consultar, ajustar e exportar.</small>
+                            </p>
+                        </div>
+                        <div>
+                            <span>✓</span>
+                            <p>
+                                <strong>Ambiente de demonstração</strong>
+                                <small>Experimente os recursos sem criar uma conta real.</small>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <p class="auth-project-note">Projeto acadêmico • SubNetFlow</p>
+            </div>
+            <div class="auth-form-panel">
+                <button class="icon-button auth-theme-toggle" id="authThemeToggle" type="button" aria-label="Alternar tema" data-theme-toggle="">
+                    <span id="authThemeIcon" data-theme-icon="" aria-hidden="true">☾</span>
+                </button>
+                <div class="auth-card">
+                    <div class="auth-tabs" role="tablist" aria-label="Acesso ao SubNetFlow">
+                        <button class="auth-tab active" id="loginTab" type="button" role="tab" data-auth-mode="login" aria-selected="true" aria-controls="loginForm" tabindex="0">Entrar</button>
+                        <button class="auth-tab" id="registerTab" type="button" role="tab" data-auth-mode="register" aria-selected="false" aria-controls="registerForm" tabindex="-1">Criar conta</button>
+                    </div>
+                    <div class="auth-copy" id="loginCopy">
+                        <h2>Bem-vindo de volta</h2>
+                        <p>Informe seus dados para experimentar o SubNetFlow.</p>
+                    </div>
+                    <div class="auth-copy" id="registerCopy" hidden>
+                        <h2>Crie seu perfil de teste</h2>
+                        <p>Preencha os campos para simular o cadastro.</p>
+                    </div>
+                    <form class="auth-form" id="loginForm" role="tabpanel" aria-labelledby="loginTab">
+                        <div class="auth-field">
+                            <label for="loginEmail">E-mail</label>
+                            <input id="loginEmail" type="email" placeholder="seuemail@exemplo.com" autocomplete="email" required="" maxlength="254">
+                        </div>
+                        <div class="auth-field">
+                            <label for="loginPassword">Senha</label>
+                            <div class="password-wrap">
+                                <input id="loginPassword" type="password" placeholder="Senha de demonstração" autocomplete="current-password" required="" maxlength="128">
+                                <button class="password-toggle" type="button" data-password-target="loginPassword" aria-label="Mostrar senha" aria-pressed="false">Mostrar</button>
+                            </div>
+                        </div>
+                        <button class="auth-submit" type="submit">Entrar <span>→</span></button>
+                    </form>
+                    <form class="auth-form" id="registerForm" hidden role="tabpanel" aria-labelledby="registerTab">
+                        <div class="auth-field">
+                            <label for="registerName">Nome</label>
+                            <input id="registerName" type="text" placeholder="Seu nome" autocomplete="name" required="" maxlength="60">
+                        </div>
+                        <div class="auth-field">
+                            <label for="registerEmail">E-mail</label>
+                            <input id="registerEmail" type="email" placeholder="seuemail@exemplo.com" autocomplete="email" required="" maxlength="254">
+                        </div>
+                        <div class="auth-field">
+                            <label for="registerPassword">Senha</label>
+                            <div class="password-wrap">
+                                <input id="registerPassword" type="password" placeholder="Senha de demonstração" autocomplete="new-password" required="" maxlength="128">
+                                <button class="password-toggle" type="button" data-password-target="registerPassword" aria-label="Mostrar senha" aria-pressed="false">Mostrar</button>
+                            </div>
+                        </div>
+                        <div class="auth-field">
+                            <label for="registerPasswordConfirm">Confirmar senha</label>
+                            <div class="password-wrap">
+                                <input id="registerPasswordConfirm" type="password" placeholder="Repita sua senha" autocomplete="new-password" required="" maxlength="128">
+                                <button class="password-toggle" type="button" data-password-target="registerPasswordConfirm" aria-label="Mostrar senha" aria-pressed="false">Mostrar</button>
+                            </div>
+                        </div>
+                        <button class="auth-submit" type="submit">Criar conta <span>→</span></button>
+                    </form>
+                    <div class="message" id="authMessage" role="alert" hidden=""></div>
+                    <button class="demo-button" id="demoButton" type="button">Experimentar demonstração</button>
+                    <p class="auth-demo-note">Protótipo: o acesso não verifica credenciais e nenhuma senha é armazenada. Use dados fictícios.</p>
+                </div>
+            </div>
+        </section>
+    </body>
+</html>

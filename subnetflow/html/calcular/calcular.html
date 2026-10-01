@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Calcule, salve e exporte planejamentos IPv4 com VLSM.">
+        <title>Planejamento | SubNetFlow</title>
+        <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="../../css/base.css">
+        <link rel="stylesheet" href="../../css/componentes.css">
+        <link rel="stylesheet" href="../../css/calcular/calcular.css">
+        <script type="module" src="../../js/calcular/calcular.js"></script>
+    </head>
+    <body>
+        <noscript>
+            <p class="noscript-note">Ative o JavaScript para usar o SubNetFlow.</p>
+        </noscript>
+        <a class="skip-link" href="#mainContent">Pular para o conteúdo</a>
+        <div id="appShell" hidden="">
+            <!-- Navegação compartilhada entre as páginas internas. -->
+            <header class="topbar">
+                <div class="topbar-left">
+                    <a class="brand" href="../calcular/calcular.html#planejamento" aria-label="Página inicial do SubnetFlow">
+                        <span class="brand-mark" aria-hidden="true">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </span>
+                        <span>Subnet<span>Flow</span></span>
+                    </a>
+                </div>
+                <nav class="desktop-nav" aria-label="Navegação principal">
+                    <a class="active" href="../calcular/calcular.html#planejamento" aria-current="page">Planejamento</a>
+                    <a href="../historico/historico.html">Histórico</a>
+                    <a href="../calcular/calcular.html#entenda">Como funciona</a>
+                </nav>
+                <div class="topbar-actions">
+                    <button class="icon-button" id="themeToggle" type="button" aria-label="Alternar tema" data-theme-toggle="">
+                        <span id="themeIcon" data-theme-icon="" aria-hidden="true">☾</span>
+                    </button>
+                    <div class="account-menu-wrap">
+                        <button class="account-button" id="accountButton" type="button" aria-label="Abrir menu da conta" aria-expanded="false" aria-controls="accountDropdown">
+                            <span class="compact-avatar" id="accountMiniAvatar" aria-hidden="true" data-user-initials="">GS</span>
+                            <span class="compact-account-name" id="accountMiniName" data-user-name="">Gestor</span>
+                            <span class="account-chevron" aria-hidden="true"></span>
+                        </button>
+                        <div class="account-dropdown" id="accountDropdown" hidden>
+                            <div class="account-summary">
+                                <span class="user-avatar" id="userAvatar" data-user-initials="">U</span>
+                                <span>
+                                    <strong id="userName" data-user-name="">Usuário</strong>
+                                    <small id="userEmail" data-user-email="">usuario@subnetflow.com</small>
+                                </span>
+                            </div>
+                            <button class="account-option account-option-text" id="profileButton" type="button" data-open-dialog="profileDialog">
+                                <span>
+                                    <strong>Perfil</strong>
+                                    <small>Visualizar dados da conta</small>
+                                </span>
+                            </button>
+                            <button class="account-option account-option-text" id="settingsButton" type="button" data-open-dialog="settingsDialog">
+                                <span>
+                                    <strong>Configurações</strong>
+                                    <small>Preferências do sistema</small>
+                                </span>
+                            </button>
+                            <div class="account-divider"></div>
+                            <button class="account-option account-option-danger" id="logoutButton" type="button">
+                                <span>↪</span>
+                                <span>
+                                    <strong>Sair</strong>
+                                    <small>Encerrar sessão</small>
+                                </span>
+                            </button>
+                            <p class="message" id="accountMessage" role="alert" hidden></p>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <main id="mainContent">
+                <section class="hero">
+                    <div>
+                        <span class="eyebrow">PLANEJAMENTO IPV4 COM VLSM</span>
+                        <h1>Transforme uma rede em um plano <em>claro e eficiente.</em>
+                        </h1>
+                        <p>Informe a rede principal e a necessidade de cada setor. O SubnetFlow calcula, organiza e explica toda a divisão para você.</p>
+                    </div>
+                    <div class="hero-status">
+                        <span class="status-dot"></span>
+                        <div>
+                            <strong>Sessão de demonstração</strong>
+                            <small>Histórico salvo neste navegador</small>
+                        </div>
+                    </div>
+                </section>
+                <p class="message page-message" id="pageMessage" role="alert" hidden></p>
+                <section class="workspace" id="planejamento">
+                    <form class="panel input-panel" id="planningForm" novalidate="">
+                        <div class="panel-heading">
+                            <div>
+                                <span class="step">01</span>
+                                <h2>Rede principal</h2>
+                            </div>
+                            <button class="text-button" id="loadExample" type="button">Carregar exemplo</button>
+                        </div>
+                        <label for="mainNetwork">Endereço IPv4 e prefixo CIDR</label>
+                        <div class="network-input-wrap">
+                            <span aria-hidden="true">⌁</span>
+                            <input id="mainNetwork" type="text" value="192.168.10.0/24" placeholder="Ex.: 192.168.10.0/24" autocomplete="off" maxlength="18" spellcheck="false" aria-describedby="networkHint networkScope">
+                        </div>
+                        <p class="field-hint" id="networkHint">Rede privada com até 254 endereços utilizáveis.</p>
+                        <p class="field-hint" id="networkScope">Planejamento de redes LAN: prefixos /0 a /30; cada sub-rede reserva rede e broadcast.</p>
+                        <div class="section-divider"></div>
+                        <div class="panel-heading sectors-heading">
+                            <div>
+                                <span class="step">02</span>
+                                <h2>Necessidades dos setores</h2>
+                            </div>
+                            <span class="counter" id="sectorCounter">4 setores</span>
+                        </div>
+                        <div class="sector-list" id="sectorList" aria-live="polite"></div>
+                        <button class="add-button" id="addSector" type="button">
+                            <span>＋</span> Adicionar setor
+                </button>
+                        <button class="calculate-button" id="calculate" type="submit">
+                    Calcular planejamento
+                    <span aria-hidden="true">→</span>
+                        </button>
+                        <div class="message" id="errorMessage" role="alert" hidden=""></div>
+                    </form>
+                    <aside class="panel preview-panel" aria-label="Prévia do planejamento" id="previewPanel">
+                        <div class="preview-top">
+                            <span class="step">PRÉVIA</span>
+                            <span class="preview-cidr" id="previewCidr">/24</span>
+                        </div>
+                        <h2>Capacidade da rede</h2>
+                        <div class="capacity-number">
+                            <strong id="capacityHosts">256</strong>
+                            <span>endereços totais</span>
+                        </div>
+                        <progress class="capacity-bar" id="usedBar" value="0" max="256" aria-label="Endereços reservados pelos blocos"></progress>
+                        <div class="capacity-labels">
+                            <span>
+                                <i class="used-dot" aria-hidden="true"></i>
+                                <b id="allocatedAddresses">116</b> reservados</span>
+                            <span>
+                                <i class="free-dot" aria-hidden="true"></i>
+                                <b id="freeHosts">140</b> livres</span>
+                        </div>
+                        <div class="map-preview">
+                            <p class="requested-count">
+                                <strong id="requestedHosts">87</strong> hosts solicitados</p>
+                            <svg class="mini-map" id="miniMap" viewbox="0 0 1000 100" preserveaspectratio="none" role="img" aria-label="Proporção dos blocos, detalhada na legenda"></svg>
+                            <ul class="map-legend" id="mapLegend"></ul>
+                            <p class="preview-message" id="previewMessage" role="status" hidden></p>
+                        </div>
+                        <div class="preview-note">
+                            <span>◎</span>
+                            <p>
+                                <strong>O bloco inteiro conta</strong> A reserva inclui hosts, rede, broadcast e folga. Os maiores setores são alocados primeiro.</p>
+                        </div>
+                    </aside>
+                </section>
+                <section class="results-section" id="resultados" hidden>
+                    <!-- Resultado calculado e ações de persistência e exportação. -->
+                    <div class="section-title-row">
+                        <div>
+                            <span class="eyebrow">PLANO GERADO</span>
+                            <h2 id="resultsTitle" tabindex="-1">Distribuição das sub-redes</h2>
+                            <p id="resultSubtitle">Resultado otimizado para 192.168.10.0/24.</p>
+                        </div>
+                        <div class="result-actions">
+                            <button class="save-network-button" id="saveNetworkButton" type="button" disabled>Salvar rede</button>
+                            <button class="secondary-button" id="exportCsv" type="button" disabled>↓ Exportar CSV</button>
+                        </div>
+                    </div>
+                    <p class="message" id="resultMessage" role="status" hidden></p>
+                    <div class="summary-grid">
+                        <article>
+                            <span>Sub-redes criadas</span>
+                            <strong id="summaryNetworks">4</strong>
+                        </article>
+                        <article>
+                            <span>Endereços reservados</span>
+                            <strong id="summaryAllocated">116</strong>
+                        </article>
+                        <article>
+                            <span>Aproveitamento</span>
+                            <strong id="summaryEfficiency">81%</strong>
+                        </article>
+                        <article>
+                            <span>Espaço restante</span>
+                            <strong id="summaryRemaining">140</strong>
+                        </article>
+                    </div>
+                    <p class="summary-note">Aproveitamento = hosts solicitados ÷ capacidade utilizável das sub-redes. Espaço restante = endereços ainda não reservados.</p>
+                    <div class="table-card">
+                        <div class="table-scroll" tabindex="0" role="region" aria-label="Resultados das sub-redes; role horizontalmente se necessário">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Setor</th>
+                                        <th scope="col">Necessidade</th>
+                                        <th scope="col">Sub-rede</th>
+                                        <th scope="col">Máscara</th>
+                                        <th scope="col">Faixa utilizável</th>
+                                        <th scope="col">Broadcast</th>
+                                        <th scope="col">Folga</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="resultsBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+                <section class="learn-section" id="entenda">
+                    <div class="learn-copy">
+                        <span class="eyebrow">ENTENDA O CÁLCULO</span>
+                        <h2>Não mostramos apenas a resposta.</h2>
+                        <p>O SubnetFlow foi pensado também como ferramenta educacional. Cada planejamento explica como o tamanho de cada bloco foi encontrado.</p>
+                    </div>
+                    <div class="learning-card">
+                        <div class="formula">
+                            <span>2<sup>n</sup> − 2</span>
+                            <strong>≥</strong>
+                            <span>hosts necessários</span>
+                        </div>
+                        <p class="learning-placeholder" id="learningPlaceholder">Calcule um planejamento para ver o exemplo do maior setor.</p>
+                        <div class="learning-example" id="learningExample" hidden>
+                            <span id="learningSector"></span>
+                            <p>
+                                <span class="learning-text" id="learningText"></span>
+                                <strong id="learningPrefix"></strong>
+                            </p>
+                        </div>
+                    </div>
+                </section>
+            </main>
+            <footer>
+                <a class="brand footer-brand" href="../calcular/calcular.html">
+                    <span>Subnet<span>Flow</span></span>
+                </a>
+                <p>Projeto acadêmico • Planejamento IPv4 com VLSM</p>
+            </footer>
+            <dialog class="app-dialog" id="profileDialog" aria-labelledby="profileTitle">
+                <div class="dialog-heading">
+                    <h2 id="profileTitle">Perfil da demonstração</h2>
+                    <form method="dialog">
+                        <button class="dialog-close" aria-label="Fechar perfil">×</button>
+                    </form>
+                </div>
+                <dl class="profile-details">
+                    <dt>Nome</dt>
+                    <dd data-user-name></dd>
+                    <dt>E-mail</dt>
+                    <dd data-user-email></dd>
+                </dl>
+                <p class="dialog-note">Esta é uma sessão de demonstração. Os planejamentos ficam neste navegador, separados pelo e-mail informado.</p>
+            </dialog>
+            <dialog class="app-dialog" id="settingsDialog" aria-labelledby="settingsTitle">
+                <div class="dialog-heading">
+                    <h2 id="settingsTitle">Configurações</h2>
+                    <form method="dialog">
+                        <button class="dialog-close" aria-label="Fechar configurações">×</button>
+                    </form>
+                </div>
+                <label for="themePreference">Aparência</label>
+                <select id="themePreference">
+                    <option value="system">Seguir o sistema</option>
+                    <option value="light">Tema claro</option>
+                    <option value="dark">Tema escuro</option>
+                </select>
+                <p class="dialog-note">Sua preferência é mantida ao navegar entre as páginas.</p>
+            </dialog>
+        </div>
+        <!-- Estruturas reutilizadas pelo controlador da calculadora. -->
+        <template id="sectorTemplate">
+            <div class="sector-row">
+                <label class="sr-only sector-name-label">Nome do setor</label>
+                <input class="sector-name" type="text" maxlength="60" placeholder="Nome do setor" required>
+                <label class="sr-only sector-hosts-label">Quantidade de hosts</label>
+                <div class="host-input">
+                    <input class="sector-hosts" type="number" min="1" max="4294967294" step="1" inputmode="numeric" required>
+                    <span aria-hidden="true">hosts</span>
+                </div>
+                <button class="remove-sector" type="button" aria-label="Remover setor">×</button>
+            </div>
+        </template>
+        <template id="resultRowTemplate">
+            <tr>
+                <td>
+                    <span class="sector-badge" aria-hidden="true"></span>
+                    <span data-field="name"></span>
+                </td>
+                <td data-field="hosts"></td>
+                <td>
+                    <span class="cidr-pill" data-field="subnet"></span>
+                </td>
+                <td data-field="mask"></td>
+                <td data-field="range"></td>
+                <td data-field="broadcast"></td>
+                <td data-field="slack"></td>
+            </tr>
+        </template>
+        <template id="mapBlockTemplate">
+            <svg xmlns="http://www.w3.org/2000/svg">
+                <rect class="map-block" y="0" height="100">
+                    <title></title>
+                </rect>
+            </svg>
+        </template>
+        <template id="mapLegendTemplate">
+            <li>
+                <span class="legend-dot" aria-hidden="true"></span>
+                <span class="legend-label"></span>
+            </li>
+        </template>
+    </body>
+</html>

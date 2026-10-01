@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Histórico dos planejamentos salvos no SubNetFlow.">
+        <title>Histórico | SubNetFlow</title>
+        <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="../../css/base.css">
+        <link rel="stylesheet" href="../../css/componentes.css">
+        <link rel="stylesheet" href="../../css/historico/historico.css">
+        <script type="module" src="../../js/historico/historico.js"></script>
+    </head>
+    <body>
+        <noscript>
+            <p class="noscript-note">Ative o JavaScript para usar o SubNetFlow.</p>
+        </noscript>
+        <a class="skip-link" href="#mainContent">Pular para o conteúdo</a>
+        <div id="appShell" hidden="">
+            <header class="topbar">
+                <div class="topbar-left">
+                    <a class="brand" href="../calcular/calcular.html#planejamento" aria-label="Página inicial do SubnetFlow">
+                        <span class="brand-mark" aria-hidden="true">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </span>
+                        <span>Subnet<span>Flow</span></span>
+                    </a>
+                </div>
+                <nav class="desktop-nav" aria-label="Navegação principal">
+                    <a href="../calcular/calcular.html#planejamento">Planejamento</a>
+                    <a href="../historico/historico.html" class="active" aria-current="page">Histórico</a>
+                    <a href="../calcular/calcular.html#entenda">Como funciona</a>
+                </nav>
+                <div class="topbar-actions">
+                    <button class="icon-button" id="themeToggle" type="button" aria-label="Alternar tema" data-theme-toggle="">
+                        <span id="themeIcon" data-theme-icon="" aria-hidden="true">☾</span>
+                    </button>
+                    <div class="account-menu-wrap">
+                        <button class="account-button" id="accountButton" type="button" aria-label="Abrir menu da conta" aria-expanded="false" aria-controls="accountDropdown">
+                            <span class="compact-avatar" id="accountMiniAvatar" aria-hidden="true" data-user-initials="">GS</span>
+                            <span class="compact-account-name" id="accountMiniName" data-user-name="">Gestor</span>
+                            <span class="account-chevron" aria-hidden="true"></span>
+                        </button>
+                        <div class="account-dropdown" id="accountDropdown" hidden>
+                            <div class="account-summary">
+                                <span class="user-avatar" id="userAvatar" data-user-initials="">U</span>
+                                <span>
+                                    <strong id="userName" data-user-name="">Usuário</strong>
+                                    <small id="userEmail" data-user-email="">usuario@subnetflow.com</small>
+                                </span>
+                            </div>
+                            <button class="account-option account-option-text" id="profileButton" type="button" data-open-dialog="profileDialog">
+                                <span>
+                                    <strong>Perfil</strong>
+                                    <small>Visualizar dados da conta</small>
+                                </span>
+                            </button>
+                            <button class="account-option account-option-text" id="settingsButton" type="button" data-open-dialog="settingsDialog">
+                                <span>
+                                    <strong>Configurações</strong>
+                                    <small>Preferências do sistema</small>
+                                </span>
+                            </button>
+                            <div class="account-divider"></div>
+                            <button class="account-option account-option-danger" id="logoutButton" type="button">
+                                <span>↪</span>
+                                <span>
+                                    <strong>Sair</strong>
+                                    <small>Encerrar sessão</small>
+                                </span>
+                            </button>
+                            <p class="message" id="accountMessage" role="alert" hidden></p>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <main class="history-main" id="mainContent">
+                <section class="history-hero">
+                    <div>
+                        <span class="eyebrow">SEUS PLANEJAMENTOS</span>
+                        <h1>Histórico de cálculos</h1>
+                        <p>Reabra, exporte e organize os planejamentos salvos com seu e-mail de demonstração neste navegador.</p>
+                    </div>
+                    <div class="history-count-card">
+                        <span>Registros salvos</span>
+                        <strong id="historyCount">0</strong>
+                    </div>
+                </section>
+                <p class="message" id="historyMessage" role="status" hidden></p>
+                <section class="history-toolbar" aria-label="Ferramentas do histórico">
+                    <div class="history-search">
+                        <label class="sr-only" for="historySearch">Buscar no histórico</label>
+                        <input id="historySearch" type="search" placeholder="Buscar por rede, setor ou CIDR..." autocomplete="off" maxlength="254">
+                    </div>
+                    <button class="history-clear" id="clearHistory" type="button" disabled>Limpar histórico</button>
+                </section>
+                <p class="search-count" id="historySearchCount" role="status">0 de 0 registros</p>
+                <section class="history-card">
+                    <div class="history-table-wrap" id="historyTableWrap" hidden="" tabindex="0" role="region" aria-label="Histórico de planejamentos; role horizontalmente se necessário">
+                        <table class="history-table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Rede principal</th>
+                                    <th scope="col">Sub-redes</th>
+                                    <th scope="col">Hosts solicitados</th>
+                                    <th scope="col">Aproveitamento</th>
+                                    <th scope="col">Data</th>
+                                    <th scope="col">Ação</th>
+                                </tr>
+                            </thead>
+                            <tbody id="historyBody"></tbody>
+                        </table>
+                    </div>
+                    <div class="history-empty" id="historyEmpty">
+                        <strong id="historyEmptyTitle">Seu histórico está vazio</strong>
+                        <p id="historyEmptyText">Calcule um planejamento e clique em Salvar rede para encontrá-lo aqui.</p>
+                        <a class="history-back" href="../calcular/calcular.html#planejamento">← Voltar para Planejamento</a>
+                    </div>
+                </section>
+            </main>
+            <footer>
+                <a class="brand footer-brand" href="../calcular/calcular.html">
+                    <span>Subnet<span>Flow</span></span>
+                </a>
+                <p>Projeto acadêmico • Planejamento IPv4 com VLSM</p>
+            </footer>
+            <dialog class="app-dialog" id="profileDialog" aria-labelledby="profileTitle">
+                <div class="dialog-heading">
+                    <h2 id="profileTitle">Perfil da demonstração</h2>
+                    <form method="dialog">
+                        <button class="dialog-close" aria-label="Fechar perfil">×</button>
+                    </form>
+                </div>
+                <dl class="profile-details">
+                    <dt>Nome</dt>
+                    <dd data-user-name></dd>
+                    <dt>E-mail</dt>
+                    <dd data-user-email></dd>
+                </dl>
+                <p class="dialog-note">Esta é uma sessão de demonstração. Os planejamentos ficam neste navegador, separados pelo e-mail informado.</p>
+            </dialog>
+            <dialog class="app-dialog" id="settingsDialog" aria-labelledby="settingsTitle">
+                <div class="dialog-heading">
+                    <h2 id="settingsTitle">Configurações</h2>
+                    <form method="dialog">
+                        <button class="dialog-close" aria-label="Fechar configurações">×</button>
+                    </form>
+                </div>
+                <label for="themePreference">Aparência</label>
+                <select id="themePreference">
+                    <option value="system">Seguir o sistema</option>
+                    <option value="light">Tema claro</option>
+                    <option value="dark">Tema escuro</option>
+                </select>
+                <p class="dialog-note">Sua preferência é mantida ao navegar entre as páginas.</p>
+            </dialog>
+            <dialog class="app-dialog" id="confirmDialog" aria-labelledby="confirmTitle">
+                <h2 id="confirmTitle">Confirmar exclusão</h2>
+                <p class="dialog-note" id="confirmationText"></p>
+                <form class="dialog-actions" method="dialog">
+                    <button class="secondary-button" value="cancel" autofocus>Cancelar</button>
+                    <button class="danger-button" value="confirm">Excluir</button>
+                </form>
+            </dialog>
+        </div>
+        <!-- Cada registro é preenchido com os dados do histórico. -->
+        <template id="historyRowTemplate">
+            <tr>
+                <td>
+                    <div class="history-network">
+                        <strong data-field="network"></strong>
+                        <small data-field="label"></small>
+                    </div>
+                </td>
+                <td data-field="subnets"></td>
+                <td data-field="hosts"></td>
+                <td data-field="efficiency"></td>
+                <td class="history-date" data-field="date"></td>
+                <td>
+                    <div class="history-row-actions">
+                        <a class="history-open">Abrir</a>
+                        <button class="history-action" type="button">Excluir</button>
+                    </div>
+                </td>
+            </tr>
+        </template>
+    </body>
+</html>

@@ -1,0 +1,256 @@
+/* Busca, tabela e estados vazios do histórico de planejamentos. */
+.history-main {
+    width: min(1180px, calc(100% - 40px));
+    margin: 0 auto;
+    padding: 54px 0 72px;
+}
+
+.history-hero {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 28px;
+}
+
+.history-hero h1 {
+    margin: 8px 0 8px;
+    font-family: "Space Grotesk", sans-serif;
+    font-size: clamp(30px, 4vw, 46px);
+    line-height: 1.08;
+}
+
+.history-hero p {
+    color: var(--muted);
+    max-width: 680px;
+}
+
+.history-count-card {
+    min-width: 160px;
+    padding: 18px 20px;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: var(--surface);
+}
+
+.history-count-card span {
+    display: block;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+}
+
+.history-count-card strong {
+    display: block;
+    margin-top: 4px;
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 30px;
+}
+
+.history-toolbar {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px;
+    margin-bottom: 16px;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: var(--surface);
+}
+
+.history-search {
+    flex: 1;
+    min-width: 0;
+    max-width: 520px;
+}
+
+.history-search input {
+    width: 100%;
+    height: 42px;
+    padding: 0 14px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--bg);
+    color: var(--text);
+    font: inherit;
+}
+
+.history-search input:focus {
+    outline: 2px solid color-mix(in srgb, var(--green) 26%, transparent);
+    border-color: var(--green);
+}
+
+.history-clear {
+    height: 42px;
+    padding: 0 16px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: transparent;
+    color: var(--muted);
+    font: inherit;
+    font-weight: 600;
+}
+
+.history-clear:hover {
+    color: var(--danger);
+    border-color: color-mix(in srgb, var(--danger) 35%, var(--line));
+}
+
+.history-card {
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    background: var(--surface);
+    box-shadow: var(--shadow);
+}
+
+.history-table-wrap {
+    overflow-x: auto;
+}
+
+.history-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 850px;
+}
+
+.history-table th,
+.history-table td {
+    padding: 16px 18px;
+    text-align: left;
+    border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+}
+
+.history-table th {
+    color: var(--muted);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    background: var(--surface-soft);
+}
+
+.history-table td {
+    font-size: 13px;
+}
+
+.history-table tbody tr:last-child td {
+    border-bottom: 0;
+}
+
+.history-table tbody tr:hover {
+    background: var(--surface-soft);
+}
+
+.history-network {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.history-network strong {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 14px;
+}
+
+.history-network small {
+    color: var(--muted);
+}
+
+.history-date {
+    color: var(--muted);
+}
+
+.history-action {
+    border: 0;
+    background: transparent;
+    color: var(--danger);
+    font: inherit;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.history-empty {
+    padding: 52px 24px;
+    text-align: center;
+}
+
+.history-empty strong {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 17px;
+}
+
+.history-empty p {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.history-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    margin-top: 20px;
+    color: var(--green);
+    font-weight: 700;
+    font-size: 13px;
+}
+
+@media (max-width: 720px) {
+    .history-main {
+        width: min(100% - 28px, 1180px);
+        padding-top: 34px;
+    }
+
+    .history-hero {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .history-count-card {
+        min-width: 0;
+        width: 100%;
+    }
+
+    .history-toolbar {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .history-search {
+        max-width: none;
+    }
+}
+
+.search-count {
+    margin: 0 0 16px;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.history-row-actions {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.history-open {
+    color: var(--green);
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.history-network small {
+    max-width: 340px;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    line-height: 1.5;
+}
+
+.history-open,
+.history-action {
+    padding: 10px 0;
+}

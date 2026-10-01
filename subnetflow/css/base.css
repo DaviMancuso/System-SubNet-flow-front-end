@@ -1,0 +1,165 @@
+/* Tokens de cor, tipografia e regras básicas usadas em todas as páginas. */
+:root {
+    --bg: #f4f7f6;
+    --surface: #ffffff;
+    --surface-soft: #edf4f1;
+    --text: #12201b;
+    --muted: #66756f;
+    --line: #dbe5e1;
+    --green: #0b8f64;
+    --green-dark: #076b4b;
+    --mint: #dff5eb;
+    --navy: #102b27;
+    --danger: #c34848;
+    --shadow: 0 18px 50px rgba(18, 52, 42, .08);
+    --button-text: #ffffff;
+    color-scheme: light;
+}
+
+[data-theme="dark"] {
+    --bg: #0b1512;
+    --surface: #111f1b;
+    --surface-soft: #172b25;
+    --text: #edf8f3;
+    --muted: #9fb3aa;
+    --line: #294039;
+    --green: #39d39e;
+    --green-dark: #26b985;
+    --mint: #183b30;
+    --navy: #06100d;
+    --danger: #ff8585;
+    --shadow: 0 18px 50px rgba(0, 0, 0, .24);
+    --button-text: #092318;
+    color-scheme: dark;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "DM Sans", sans-serif;
+    transition: background .25s, color .25s;
+}
+
+button {
+    cursor: pointer;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.eyebrow {
+    color: var(--green);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .14em;
+}
+
+h1,
+h2 {
+    font-family: "Space Grotesk", sans-serif;
+    letter-spacing: -.035em;
+    margin: 0;
+}
+
+h1 {
+    font-size: clamp(42px, 5vw, 68px);
+    line-height: 1.02;
+    margin-top: 17px;
+}
+
+h1 em {
+    color: var(--green);
+    font-style: normal;
+}
+
+label {
+    display: block;
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 600;
+    margin: 0 0 8px;
+}
+
+@media (max-width: 620px) {
+    h1 {
+        font-size: 39px;
+    }
+}
+
+[hidden] {
+    display: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+    }
+}
+
+/* Estados comuns de interação e leitura. */
+button:disabled {
+    cursor: default;
+    opacity: 0.65;
+    transform: none;
+}
+
+:focus-visible {
+    outline: 3px solid var(--green);
+    outline-offset: 4px;
+}
+
+input:focus-visible {
+    outline-offset: 2px;
+}
+
+button,
+input,
+select {
+    font: inherit;
+}
+
+input,
+select {
+    min-width: 0;
+}
+
+section[id] {
+    scroll-margin-top: 120px;
+}
+
+.skip-link {
+    position: fixed;
+    top: -100px;
+    left: 16px;
+    z-index: 100;
+    padding: 12px 18px;
+    border-radius: 8px;
+    background: var(--surface);
+    color: var(--text);
+}
+
+.skip-link:focus {
+    top: 12px;
+}
+
+.noscript-note {
+    padding: 18px;
+    text-align: center;
+    color: var(--danger);
+}

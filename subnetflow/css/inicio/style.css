@@ -1,0 +1,341 @@
+/* Apresentação e formulários de acesso ao protótipo. */
+.auth-screen {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: minmax(380px, .95fr) minmax(480px, 1.05fr);
+    background: var(--bg);
+}
+
+.auth-brand-panel {
+    min-height: 100vh;
+    padding: 48px clamp(42px, 6vw, 88px);
+    display: flex;
+    flex-direction: column;
+    background: var(--navy);
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.auth-brand-panel::before {
+    content: "";
+    width: 440px;
+    height: 440px;
+    border-radius: 50%;
+    position: absolute;
+    right: -220px;
+    top: 18%;
+    background: color-mix(in srgb, var(--green) 20%, transparent);
+    filter: blur(1px);
+}
+
+.auth-brand-panel::after {
+    content: "";
+    width: 260px;
+    height: 260px;
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 50%;
+    position: absolute;
+    right: -30px;
+    bottom: -100px;
+}
+
+.auth-brand {
+    color: white;
+    position: relative;
+    z-index: 1;
+    width: fit-content;
+}
+
+.auth-presentation {
+    margin: auto 0;
+    max-width: 590px;
+    position: relative;
+    z-index: 1;
+}
+
+.auth-presentation .eyebrow {
+    color: #55dbaa;
+}
+
+.auth-presentation h1 {
+    color: white;
+    margin: 16px 0 20px;
+    font-size: clamp(43px, 4.4vw, 68px);
+    line-height: 1.04;
+}
+
+.auth-presentation h1 em {
+    color: #55dbaa;
+}
+
+.auth-presentation > p {
+    max-width: 540px;
+    color: #a9c4ba;
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+.auth-feature-list {
+    margin-top: 38px;
+    display: grid;
+    gap: 17px;
+}
+
+.auth-feature-list > div {
+    display: flex;
+    gap: 13px;
+    align-items: flex-start;
+}
+
+.auth-feature-list > div > span {
+    width: 25px;
+    height: 25px;
+    flex: 0 0 25px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    color: #55dbaa;
+    background: rgba(85,219,170,.12);
+    font-weight: 800;
+    font-size: 12px;
+}
+
+.auth-feature-list p {
+    margin: 0;
+    display: grid;
+    gap: 3px;
+}
+
+.auth-feature-list strong {
+    font-size: 13px;
+    color: #eaf6f1;
+}
+
+.auth-feature-list small {
+    color: #88a79c;
+    line-height: 1.45;
+}
+
+.auth-project-note {
+    margin: 0;
+    color: #708d82;
+    font-size: 11px;
+    position: relative;
+    z-index: 1;
+}
+
+.auth-form-panel {
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    padding: 64px 32px;
+    position: relative;
+}
+
+.auth-theme-toggle {
+    position: absolute;
+    top: 28px;
+    right: 32px;
+}
+
+.auth-card {
+    width: min(100%, 450px);
+}
+
+.auth-tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px;
+    padding: 5px;
+    margin-bottom: 34px;
+    border-radius: 12px;
+    background: var(--surface-soft);
+    border: 1px solid var(--line);
+}
+
+.auth-tab {
+    border: 0;
+    border-radius: 8px;
+    height: 42px;
+    color: var(--muted);
+    background: transparent;
+    font-weight: 700;
+}
+
+.auth-tab.active {
+    color: var(--text);
+    background: var(--surface);
+    box-shadow: 0 3px 12px rgba(18,52,42,.08);
+}
+
+.auth-copy h2 {
+    margin: 0;
+    font: 700 31px "Space Grotesk", sans-serif;
+}
+
+.auth-copy p {
+    margin: 9px 0 29px;
+    color: var(--muted);
+}
+
+.auth-form {
+    display: grid;
+    gap: 18px;
+}
+
+.auth-field {
+    display: grid;
+    gap: 8px;
+}
+
+.auth-field label {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text);
+}
+
+.auth-field input {
+    width: 100%;
+    height: 50px;
+    padding: 0 14px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--surface);
+    color: var(--text);
+    outline: none;
+    transition: border-color .2s, box-shadow .2s;
+}
+
+.auth-field input:focus {
+    border-color: var(--green);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--green) 10%, transparent);
+}
+
+.password-wrap {
+    position: relative;
+}
+
+.password-wrap input {
+    padding-right: 74px;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 0;
+    background: transparent;
+    color: var(--green);
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.auth-submit {
+    height: 52px;
+    border: 0;
+    border-radius: 10px;
+    margin-top: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: var(--green);
+    color: var(--button-text);
+    font-weight: 800;
+    box-shadow: 0 9px 20px color-mix(in srgb, var(--green) 24%, transparent);
+}
+
+.auth-submit:hover {
+    background: var(--green-dark);
+    transform: translateY(-1px);
+}
+
+.auth-demo-note {
+    margin: 24px 0 0;
+    text-align: center;
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.5;
+}
+
+@media (max-width: 900px) {
+    .auth-screen {
+        grid-template-columns: 1fr;
+    }
+
+    .auth-brand-panel {
+        min-height: auto;
+        padding: 36px 28px 40px;
+    }
+
+    .auth-presentation {
+        margin: 68px 0 20px;
+    }
+
+    .auth-presentation h1 {
+        font-size: 45px;
+    }
+
+    .auth-feature-list,
+    .auth-project-note {
+        display: none;
+    }
+
+    .auth-form-panel {
+        min-height: auto;
+        padding: 55px 24px 70px;
+    }
+}
+
+@media (max-width: 620px) {
+    .auth-brand-panel {
+        padding: 27px 20px 32px;
+    }
+
+    .auth-presentation {
+        margin-top: 48px;
+    }
+
+    .auth-presentation h1 {
+        font-size: 36px;
+    }
+
+    .auth-presentation > p {
+        font-size: 14px;
+    }
+
+    .auth-form-panel {
+        padding: 52px 18px 60px;
+    }
+
+    .auth-theme-toggle {
+        top: 18px;
+        right: 18px;
+    }
+}
+
+.demo-button {
+    width: 100%;
+    min-height: 46px;
+    margin-top: 18px;
+    padding: 10px 14px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--surface);
+    color: var(--green);
+    font-weight: 700;
+}
+
+.demo-button:hover {
+    border-color: var(--green);
+}
+
+.auth-demo-note {
+    font-size: 12px;
+}
+
+.auth-field label {
+    margin: 0;
+}
